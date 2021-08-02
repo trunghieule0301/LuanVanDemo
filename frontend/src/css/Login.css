@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext");
+
+.decor {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+  font-size: 170px;
+  color: rgb(248, 221, 116);
+  line-height: 0.8;
+}
+
+.decor1 {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+  font-size: 120px;
+  color: rgb(248, 221, 116);
+  line-height: 0.2;
+}
+
+.align {
+  height: 100%;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.login-text {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+  font-size: 60px;
+  color: rgb(160, 208, 248);
+}
+
+.background {
+  background-color: rgb(122, 89, 228);
+  padding: 50px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap {
+  width: 100%;
+}
+
+.margin {
+  margin-top: 50px;
+}
+
+.wrap-login {
+  background-color: white;
+  padding-left: 70px;
+  padding-right: 70px;
+  border-radius: 30px;
+  height: 550px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.wrap-login1 {
+  width: 100%;
+}
+
+.size {
+  font: 100px;
+}
+
+.brand {
+  color: rgb(160, 208, 248);
+}
+
+.spin {
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 4px;
+}
