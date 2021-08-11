@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Input } from 'antd';
-import axios from 'axios';
+import HTTP from '../services/axiosConfig'
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     const [form] = Form.useForm();
     return (
         <Modal
             visible={visible}
-            title="Create a new Category"
+            title="Create a new Location"
             okText="Create"
             cancelText="Cancel"
             onCancel={onCancel}
@@ -37,7 +37,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input the name of category!',
+                            message: 'Please input the name of location!',
                         },
                     ]}
                 >
@@ -52,13 +52,13 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input the slug of category!',
+                            message: 'Please input the slug of location!',
                         },
                         {
                             validator: (_, value) =>
                                 //value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
                                 new Promise(function (resolve, reject) {
-                                    axios.get('http://127.0.0.1:8000/manage/book-category')
+                                    HTTP.get('manage/book-location')
                                         .then(function (json) {
 
                                             var hasMatch = false;
@@ -74,7 +74,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                                             }
 
                                             if (hasMatch) {
-                                                reject(new Error('A category with that slug already exists!'))
+                                                reject(new Error('A location with that slug already exists!'))
                                             }
 
                                             resolve();
@@ -90,11 +90,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     );
 };
 
-const FormInModal = () => {
+const FormModalInLocation = ({ handleFinish }) => {
     const [visible, setVisible] = useState(false);
-
-    const onCreate = (values) => {
-        axios.post('http://127.0.0.1:8000/manage/book-category-create', {
+    const onCreate = async (values) => {
+        await HTTP.post('manage/book-location-create', {
             name: values.name,
             description: values.description,
             slug: values.slug
@@ -105,6 +104,7 @@ const FormInModal = () => {
             .catch((err) => {
                 console.log(err)
             })
+        handleFinish()
         setVisible(false);
     };
 
@@ -117,7 +117,7 @@ const FormInModal = () => {
                 }}
                 style={{ borderRadius: 5 }}
             >
-                + New Category
+                + New Location
             </Button>
             <CollectionCreateForm
                 visible={visible}
@@ -130,4 +130,4 @@ const FormInModal = () => {
     );
 };
 
-export default FormInModal;
+export default FormModalInLocation;

@@ -114,6 +114,11 @@ const NavbarComponent = ({ logout, history }) => {
         history.push('/admin/temp')
     };
 
+    const logOut = () => {
+        logout();
+        history.push('/login');
+    }
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
 
@@ -127,7 +132,7 @@ const NavbarComponent = ({ logout, history }) => {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleProfileOpen}>Profile</MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={logOut}>Logout</MenuItem>
         </Menu>
     );
 
@@ -158,7 +163,7 @@ const NavbarComponent = ({ logout, history }) => {
 
     return (
         <div className={classes.grow}>
-            <AppBar style={{ background: 'rgb(122, 89, 228)' }} position="static">
+            <AppBar style={{ background: 'rgb(115, 178, 245)' }} position="static">
                 <Toolbar>
                     <Typography style={{ color: 'white', fontWeight: 'bold' }} className={classes.title} variant="h5" noWrap>
                         LOGO

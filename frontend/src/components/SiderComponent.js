@@ -12,12 +12,10 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import BookIcon from '@material-ui/icons/Book';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import ListIcon from '@material-ui/icons/List';
-import ImportExportIcon from '@material-ui/icons/ImportExport';
 import HomeIcon from '@material-ui/icons/Home';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,25 +33,18 @@ const { Sider } = Layout;
 const SiderComponent = () => {
     const classes = useStyles();
     const [openFirst, setOpenFirst] = React.useState(true);
-    const [open, setOpen] = React.useState(true);
 
     let indexUrl = null;
     if (window.location.pathname === '/admin') indexUrl = "/admin";
     else if (window.location.pathname === '/admin/all-book') indexUrl = "/admin/all-book";
     else if (window.location.pathname === '/admin/book-category') indexUrl = "/admin/book-category";
-    else if (window.location.pathname === '/admin/book-lending-lent') indexUrl = "/admin/book-lending-lent";
-    else if (window.location.pathname === '/admin/book-lending-pending') indexUrl = "/admin/book-lending-pending";
+    else if (window.location.pathname === '/admin/book-location') indexUrl = "/admin/book-location";
     else if (window.location.pathname === '/admin/users') indexUrl = "/admin/users";
 
     const [selectedIndex, setSelectedIndex] = React.useState(indexUrl);
 
     const handleFirstClick = (event, index) => {
         setOpenFirst(!openFirst);
-        setSelectedIndex(index);
-    };
-
-    const handleClick = (event, index) => {
-        setOpen(!open);
         setSelectedIndex(index);
     };
 
@@ -113,6 +104,17 @@ const SiderComponent = () => {
                                 <ListItemText primary="Category" />
                             </ListItem>
                         </Link>
+                        <Link style={{ color: 'black' }} to="/admin/book-location">
+                            <ListItem button className={classes.nested}
+                                selected={selectedIndex === "/admin/book-location"}
+                                onClick={(event) => handleListItemClick(event, "/admin/book-location")}
+                            >
+                                <ListItemIcon>
+                                    <SearchIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Location" />
+                            </ListItem>
+                        </Link>
                         <Link style={{ color: 'black' }} to="/admin/all-book">
                             <ListItem button className={classes.nested}
                                 selected={selectedIndex === "/admin/all-book"}
@@ -137,42 +139,6 @@ const SiderComponent = () => {
                         <ListItemText primary="User" />
                     </ListItem>
                 </Link>
-                <ListItem button
-                    onClick={(event) => handleClick(event, "book-lending")}
-                    selected={selectedIndex === "book-lending"}
-                >
-                    <ListItemIcon>
-                        <ImportExportIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Book lending" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <Link style={{ color: 'black' }} to="/admin/book-lending-pending">
-                            <ListItem button className={classes.nested}
-                                selected={selectedIndex === "/admin/book-lending-pending"}
-                                onClick={(event) => handleListItemClick(event, "/admin/book-lending-pending")}
-                            >
-                                <ListItemIcon>
-                                    <HourglassEmptyIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Pending" />
-                            </ListItem>
-                        </Link>
-                        <Link style={{ color: 'black' }} to="/admin/book-lending-lent">
-                            <ListItem button className={classes.nested}
-                                selected={selectedIndex === "/admin/book-lending-lent"}
-                                onClick={(event) => handleListItemClick(event, "/admin/book-lending-lent")}
-                            >
-                                <ListItemIcon>
-                                    <LibraryBooksIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Lent" />
-                            </ListItem>
-                        </Link>
-                    </List>
-                </Collapse>
             </List>
         </Sider>
 

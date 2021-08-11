@@ -17,6 +17,21 @@ class BookLocationView(generics.ListAPIView):
     serializer_class = BookLocationSerializer
 
 
+class BookLocationCreateView(generics.CreateAPIView):
+    queryset = BookLocation.objects.all()
+    serializer_class = BookLocationSerializer
+
+
+class BookLocationUpdateView(generics.UpdateAPIView):
+    queryset = BookLocation.objects.all()
+    serializer_class = BookLocationSerializer
+
+
+class BookLocationDeleteView(generics.DestroyAPIView):
+    queryset = BookLocation.objects.all()
+    serializer_class = BookLocationSerializer
+
+
 class BookCategoryView(generics.ListAPIView):
     queryset = BookCategory.objects.all()
     serializer_class = BookCategorySerializer
@@ -43,6 +58,21 @@ class BookCategoryDeleteView(generics.DestroyAPIView):
 
 
 class BookView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+class BookCreateView(generics.CreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+class BookUpdateView(generics.UpdateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
+class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 

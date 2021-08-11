@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Result } from 'antd';
+import { Result, Button } from 'antd';
 
-const NotFound = () => (
+const NotFound = ({ history }) => (
     <Result
         status="404"
         title="404"
         subTitle="Sorry, the page you visited does not exist."
-        extra={<Link to="/admin">
-            Go Home
-        </Link>}
+        extra={<Button onClick={() => history.goBack()} type="primary">Back to previous page</Button>}
     />
 );
 

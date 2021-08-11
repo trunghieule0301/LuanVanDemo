@@ -4,9 +4,9 @@ from django.db import models
 
 
 def upload_location(instance, filename, **kwargs):
-    file_path = 'blog/{book_id}/{title}-{filename}'.format(
-        book_id=str(instance.book.id),
-        title=str(instance.title),
+    file_path = 'frontend/src/files/{book_slug}/{filename}'.format(
+        book_slug=str(instance.slug),
+        title=str(instance.name),
         filename=filename
     )
     return file_path
@@ -34,6 +34,7 @@ class Book(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     description = models.TextField(max_length=5000, null=True, blank=True)
     image = models.ImageField(upload_to=upload_location, null=True, blank=True)
+    bookImage = models.CharField(max_length=200, null=True, blank=True)
     date_published = models.DateTimeField(
         auto_now_add=True, verbose_name="date published")
     date_updated = models.DateTimeField(

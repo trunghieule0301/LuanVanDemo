@@ -13,7 +13,8 @@ import * as actions from './store/actions/auth';
 import { Route } from "react-router-dom";
 import './css/App.css';
 import Homepage from './pages/Homepage';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/ErrorStatus/NotFound';
+import NotAuthorized from './pages/ErrorStatus/NotAuthorized';
 
 class App extends Component {
   componentDidMount() {
@@ -45,7 +46,7 @@ class App extends Component {
                   <BaseRouter />
                 </PageLayout>
                 :
-                <Redirect to="/login" />
+                <NotAuthorized />
             }} />
 
             <Route path='*' component={NotFound} />
