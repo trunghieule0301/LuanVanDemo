@@ -6,14 +6,13 @@ import Category from './pages/Manage/Book/Category'
 import Lent from './pages/Manage/BookLending/Lent'
 import Pending from './pages/Manage/BookLending/Pending'
 import User from './pages/Manage/User/User'
-//import Home from './pages/Manage/Home/Home'
+import Home from './pages/Manage/Home/Home'
 import BookLocation from "./pages/Manage/Book/BookLocation";
 //import example from './pages/temp3'
-import Avatar from './pages/temp'
 
 const BaseRouter = () => (
   <Switch>
-    <Route exact path='/admin' component={Avatar} />
+    <Route exact path='/admin' component={Home} />
     <Route path='/admin/all-book' component={AllBooks} />
     <Route exact path='/admin/book-category' component={Category} />
     <Route exact path='/admin/book-location' component={BookLocation} />
