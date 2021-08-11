@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
-import HTTP from '../../../services/axiosConfig';
+import HTTP from '../services/axiosConfig';
 
 const style = {
     height: 30,
@@ -10,8 +10,9 @@ const style = {
 };
 
 const Homepage = () => {
+
+    const [items, setItems] = useState(Array.from({ length: 20 }))
     const [book, setBook] = useState([]);
-    const [items, setItems] = useState(book.from({ length: 20 }))
 
     React.useEffect(() => {
         fetchData()
@@ -27,7 +28,7 @@ const Homepage = () => {
         // a fake async api call like which sends
         // 20 more records in 1.5 secs
         setTimeout(() => {
-            setItems(items.concat(book.from({ length: 20 })))
+            setItems(items.concat(Array.from({ length: 20 })))
         }, 1500);
     };
 
