@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -11,11 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-//import FavoriteIcon from '@material-ui/icons/Favorite';
-//import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-//import MoreVertIcon from '@material-ui/icons/MoreVert';
-import HTTP from '../services/axiosConfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,28 +37,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RecipeReviewCard({ name, description, author, image, location, category }) {
+export default function RecipeReviewCard({ name, description, author, image, location, category, bookLocation, bookCategory }) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    const [bookCategory, setBookCategory] = React.useState([]);
-    const [bookLocation, setBookLocation] = React.useState([]);
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
         console.log(image)
     };
-
-    useEffect(() => {
-        async function fetchData() {
-            await HTTP.get('manage/book-category').then((res) => {
-                setBookCategory(res.data)
-            })
-            await HTTP.get('manage/book-location').then((res) => {
-                setBookLocation(res.data)
-            })
-        }
-        fetchData();
-    })
 
     const locate = bookLocation.filter(value => location.includes(value.id)).map(value => value.name)
     const cate = bookCategory.filter(value => category.includes(value.id)).map(value => value.name)

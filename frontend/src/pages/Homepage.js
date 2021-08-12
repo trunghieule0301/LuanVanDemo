@@ -22,6 +22,8 @@ const Homepage = () => {
     const [book, setBook] = useState([]);
     const [items, setItems] = useState([]);
     const [hasMore, setHasMore] = useState(true);
+    const [bookCategory, setBookCategory] = useState([]);
+    const [bookLocation, setBookLocation] = useState([]);
 
     const [filter, setFilter] = useState({
         search: '',
@@ -31,14 +33,23 @@ const Homepage = () => {
         async function fetchData() {
             const paramString = querystring.stringify(filter)
             await HTTP.get(`manage/books?${paramString}`).then((res) => {
+                fetchDataTemp()
                 setBook(res.data)
                 setItems(res.data.slice(0, 4))
-                console.log(res.data.slice(0, 4))
             })
         }
 
         fetchData()
     }, [filter])
+
+    const fetchDataTemp = async () => {
+        await HTTP.get('manage/book-category').then((res) => {
+            setBookCategory(res.data)
+        })
+        await HTTP.get('manage/book-location').then((res) => {
+            setBookLocation(res.data)
+        })
+    }
 
     const fetchMoreData = () => {
         if (items.length >= book.length) {
@@ -88,7 +99,7 @@ const Homepage = () => {
             >
                 {items.map((value, index) => (
                     <div key={index}>
-                        <Card author={value.author} image={value.image} location={value.location} category={value.category} description={value.description} name={value.name} />
+                        <Card author={value.author} bookLocation={bookLocation} bookCategory={bookCategory} image={value.image} location={value.location} category={value.category} description={value.description} name={value.name} />
                     </div>
                 ))}
             </InfiniteScroll>
