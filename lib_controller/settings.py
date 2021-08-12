@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
+    'django_filters',
+
 ]
 
 SITE_ID = 1
@@ -140,10 +142,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = ''
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/build/static')
@@ -159,4 +165,6 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 REST_FRAMEWORK = {
     'USER_DETAILS_SERIALIZER': 'path.to.custom.GameUserSerializer',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

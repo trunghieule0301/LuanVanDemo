@@ -4,6 +4,9 @@ from .serializers import BookLocationSerializer, BookCategorySerializer, BookSer
 from .models import BookLocation, Book, BookCategory
 from django.contrib.auth.models import User
 from api.serializers import UserSerializer
+from rest_framework.pagination import PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 # Create your views here.
 
 
@@ -60,6 +63,8 @@ class BookCategoryDeleteView(generics.DestroyAPIView):
 class BookView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'author']
 
 
 class BookCreateView(generics.CreateAPIView):
